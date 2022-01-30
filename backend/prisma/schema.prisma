@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model budget_management {
+  id_budget_management  Int @id @default(autoincrement())
+  concept   String
+  amount    Decimal @db.Decimal(10, 2)
+  date      DateTime
+  type      status   @default(income)
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+}
+
+enum status {
+  income
+  expenses
+}
